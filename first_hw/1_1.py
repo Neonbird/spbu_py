@@ -1,10 +1,24 @@
+from string import ascii_uppercase
+
+num_to_let = {}
+num = 10
+for lett in ascii_uppercase:
+    num_to_let[lett] = num
+    num += 1
+
+let_to_num = {}
+num = 10
+for lett in ascii_uppercase:
+    let_to_num[num] = lett
+    num += 1
+
+
 def base_to_ten(number, base):
     number = list(number)
-    if base == 16:
-        sixteen_to_ten = {"A": 10, "B": 11, "C": 12, "D": 13, "E": 14, "F": 15}
+    if base > 10:
         for index, numeral in enumerate(number):
-            if numeral in sixteen_to_ten.keys():
-                number[index] = sixteen_to_ten[numeral]
+            if numeral in num_to_let.keys():
+                number[index] = num_to_let[numeral]
     number = [int(x) for x in number]
     num_base_ten = 0
     for index, numeral in enumerate(number[::-1]):
@@ -22,11 +36,10 @@ def ten_to_result_base(number_in_ten, base_of_res, num_res_base=None):
         num_res_base.append(quotient)
     else:
         ten_to_result_base(quotient, base_of_res, num_res_base)
-    if base_of_res == 16:
-        ten_to_sixteen = {10:"A", 11:"B", 12:"C", 13:"D", 14:"E", 15:"F"}
+    if base_of_res > 10:
         for index, numeral in enumerate(num_res_base):
-            if numeral in ten_to_sixteen.keys():
-                num_res_base[index] = ten_to_sixteen[numeral]
+            if numeral in let_to_num.keys():
+                num_res_base[index] = let_to_num[numeral]
     return num_res_base[::-1]
 
 
